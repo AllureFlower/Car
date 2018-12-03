@@ -1,0 +1,150 @@
+{:hook('header')} 
+<link rel="stylesheet" type="text/css" href="__PLUGS__/font-awesome/css/font-awesome.min.css"/>
+<include file = 'Picker/index'/>   
+<div class="sidebar">
+    <include file = 'User/sidemenu'/>   
+</div>
+
+<script type="text/javascript">
+	$('.sildemenu').children('li').eq(1).removeClass('current');
+	$('.feedb').children('li').eq(1).addClass('current');
+	$('.fedbk').addClass('current');
+</script>
+
+<div id="main-content" style="margin-left: 200px;margin-top: 50px">
+    <div class="main" style="min-height: 483px;">    
+		<div class="showlist">
+			<div class="main-title">
+				<h2>用户管理-->普通用户</h2>
+			</div>
+		    <div class="cf">
+				<!--<div class="fl ss">
+		            <button class="btn ajax-post btn_agree" >同 意</button>
+				</div> -->
+				
+				<!-- 高级搜索 -->
+				<div class="search-form fr cf">
+					<div class="sleft">
+						<div class="drop-down">
+							<span id="sch-sort-txt" class="sort-txt" style='margin-right: -3px;'>昵  称</span>
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						</div>
+						<input type="text" name="time" class="search-input" id='time' value="" placeholder="请输入昵称">
+
+						<a class="sch-btn" href="javascript:;" id="search"><i class="btn-search"></i></a>
+					</div>
+		            <div class="btn-group-click adv-sch-pannel fl fls bgcom">
+		                <button class="btn">搜 索<i class="fa fa-support" style='margin-left: 8px;'></i></button>
+		            </div>
+				</div>
+			</div>
+    		<!-- 数据列表 -->
+   	 		<div class="data-table table-striped">
+				<table>
+	    		<!-- 表头 -->
+				    <thead>
+				        <tr>
+				            <th class="row-selected row-selected">
+				                <i class="fa fa-user-circle" aria-hidden="true"></i>
+				            </th>
+				            <th>编号</th>
+				            <th>昵称</th> 
+				            <th>姓名</th> 
+				            <th>手机号</th>
+				            <th>注册日期</th>
+				             <th>状态</th>
+				            <th>操作</th>   
+				        </tr>
+				    </thead>
+		
+				    <!-- 列表 -->
+				    <tbody>
+				    	<foreach name="data" item="vo">
+				        <tr>
+					        <td><i class="fa fa-user-circle" aria-hidden="true"></i></td>
+					        <td>{$vo.openid}</td>  
+					        <td>{$vo.nickname}</td> 
+					        <td>{$vo.name|default='暂未开通'}</td> 
+					        <td>{$vo.phone|default='暂未'}</td>  
+					        <td>{$vo.time|date='Y-m-d',###}</td> 
+					        <td><if condition="$vo.status eq 1">正常
+    		<else /> 禁用
+			</if></td> 
+					        <td>  
+					        	<a class='refuse' href="javascript:void(0)" data-id='{$vo.openid}' data='{$vo.nickname}'>禁用</a> 
+					        	<a href="javascript:void(0)" class='show' data-id='{$vo.openid}' >查看</a>
+					        </td> 
+					        </tr>
+				        </foreach>
+				    </tbody>
+				</table>
+			</div>
+	    	<div class="page">
+	    		{$show}
+	    	</div>
+		</div>
+    </div>
+</div>
+<script type="text/javascript">
+	$('.show').click(function() {
+		var id = $(this).attr('data-id');
+		layer.open({
+			type: 2,
+			title: '',
+			shadeClose: true,
+			shade: 0.8,
+			area: ['80%', '60%'],
+			content: '__CONTROLLER__/show/openid/'+id, 
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$("#search").click(function(){
+        var time  = $('.search-form').find('input').val();
+       	if(time == '') {
+       		layer.msg('请输入昵称', {
+                icon: 2,
+                time: 2000,
+                shift:6,
+                shade:0.3,
+            });
+       	}else {
+       		window.location.href = '__CONTROLLER__/index/nickname/'+time;
+       	}
+	});
+	$(".bgcom").click(function(){
+        var time  = $('.search-form').find('input').val();
+       	if(time == '') {
+       		layer.msg('请输入昵称', {
+                icon: 2,
+                time: 2000,
+                shift:6,
+                shade:0.3,
+            });
+       	}else {
+       		window.location.href = '__CONTROLLER__/index/nickname/'+time;;
+       	}
+	});
+</script>
+
+<script type="text/javascript">
+	$('.refuse').click(function() {
+		var id = $(this).attr('data-id');
+		var url = '__CONTROLLER__/none';
+		var data = $(this).attr('data');
+		var string = '禁止该用户 "' + data + '" 登录';
+		
+		layer.confirm(string, {icon: 3, title:'提示'}, function(){
+		  	$.get(url, {openid:id}, function(data){
+				if(data.status){
+				 	layer.msg(data.info, {icon: 1}, function() {
+					  	window.location.href = '{:U("User/refuse")}';
+					});
+				}else {
+					
+				}
+			},'json');
+		});
+	})
+</script>

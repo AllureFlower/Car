@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>预定详情</title>
+    <script src="__JS__/mui.min.js" type="text/javascript"></script>
+    <link href="__CSS__/mui.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/app.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css"/>
+    <style type='text/css'>
+    	.bag {
+    padding: 4px 0;
+    font-size: 1rem;
+    text-align: center;
+    float: left;
+    	}
+    	.bgp {
+    		    padding: 0 2%;
+    background: #fff;
+    margin-top: 10px;
+    	}
+    </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #dd524d;"></a>
+		<h1 class="mui-title" style="color: #dd524d;">预定详情</h1>
+	</header>
+	<div class="mui-content">
+		<div class="dshow">
+			<div style="padding: 14px 7px;">
+				<div class="dl" style='width: 100%;'>
+					<p class="adress">地点：{$data.localfrom.proname}&nbsp;-&nbsp;{$data.localto.proname}</p>
+					<p>路线：{$data.owner.rout}</p> 
+					<p>出发时间：{$data.owner.time|date="Y-m-d H:i",###}&nbsp;</p>
+					<p>车主：{$data.owner.user.name}</p>
+					<p>预约时间：{$data.time|date="Y-m-d H:i",###}&nbsp;</p>
+					<p>预约人：{$data.user.name}</p> 
+					<p>手机号：{$data.phone}</p> 
+					<p>联系电话：  {$data.user.phone}</p> 
+					<p>预约人数：  {$data.number}人</p> 
+					<p>车型：  {$data.owner.carmodel}</p> 
+					<p>单价： ${$data.owner.money}/座</p> 
+					<p>状态：  <if condition="$data.tuiding eq 1 ">退订成功
+					<elseif condition="$data.tuiding eq 2 "/>退订失败
+					<elseif condition="$data.tuiding eq 3 "/>待退订
+					<elseif condition="$data.status eq 0"/>待审核
+					<elseif condition="$data.status eq 1"/>预约成功
+					<elseif condition="$data.status eq 2"/>预约失败
+					</if></p> 
+					<p><if condition="$data.status eq 2 ">原因： {$data.result}
+					</if></p>
+					
+					<empty name="data.message"><p>备注：暂无备注消息</p> 
+					<else /> <p>备注：{$data.message}</p> 
+					</empty>
+					
+					<if condition="$data.tuiding eq 2 ">
+						<p>原因：  {$data.t_result|utf_substr=###,4}</p> 
+					</if>
+						
+					
+					
+				</div>
+			</div>
+		</div>
+		<input name='id' type='hidden' id = 'id' value='{$id}' />
+		
+		<div class='bgp'>
+				 <if condition="$data.tuiding eq 1 ">
+<button type='button' class="mui-btn mui-btn-warning mui-btn-block bag" style='float: right;'>退订成功</button>
+			 	<elseif condition="$data.tuiding eq 2 "/>
+<button type='button' class="mui-btn mui-btn-warning mui-btn-block bag" style='float: right;'>退订失败</button>
+			 	<elseif condition="$data.tuiding eq 3 "/>
+<button type='button' class="mui-btn mui-btn-warning mui-btn-block bag" style='float: right;'>待退订</button>
+				 <elseif condition="$data.status eq 0 "/>
+<button type='button' class="mui-btn mui-btn-warning mui-btn-block bag" style='float: right;'>待审核</button>
+					<elseif condition="$data.status eq 1"/>
+<button id='btnmui' type='button' class="mui-btn mui-btn-danger mui-btn-block bag" style='float: right;'>退订</button>
+					<elseif condition="$data.status eq 2"/>
+<button type='button' class="mui-btn mui-btn-warning mui-btn-block bag" style='float: right;'>预约失败</button>
+				</if>
+			
+		</div>
+	
+		<p style='    margin-top: 58px;
+    padding: 8px;
+    text-align: center;'>温馨提示：更多详情信息可以通过电话沟通，请注意人财安全</p>
+	</div>
+  
+	<script type="text/javascript" charset="utf-8">
+      	mui.init();
+   </script>
+   
+   
+	
+	<script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+
+    
+    <script src="__JS__/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript">
+    	var agree = document.getElementById('btnmui');
+    	var idvalue = document.getElementById('id').value;
+    	agree.addEventListener('tap', function(e) {
+    		
+    		e.detail.gesture.preventDefault(); 
+			var btnArray = ['取消', '确定'];
+			mui.prompt('你好，请输入退订理由', '你的理由是？', '顺风车', btnArray, function(e) {
+				if (e.index == 1) {
+					
+					var pess_result = e.value;
+					
+					$.post('{:U("Car/infoinfo")}', {id : idvalue, pess_result : pess_result}, function(data) {
+		    			data = JSON.parse(data);
+		     			 if(data.status) {
+		     			 	mui.alert(data.info, '顺风车', function() {
+								window.location.href = "{:U('Car/message')}";		
+							});
+		     			 }else {
+		     			 	mui.alert(data.info); 
+		     			 }
+		    		});
+				} else {
+//					info.innerText = '你点了取消按钮';
+				}
+			})
+    		
+    		
+    		
+    	});
+    	
+    	
+    	
+    </script>
+   
+</body>
+</html>

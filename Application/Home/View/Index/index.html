@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>个人中心</title>
+    <script src="__JS__/mui.min.js" type="text/javascript"></script>
+    <link href="__CSS__/mui.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/app.css"/>
+     <link rel="stylesheet" type="text/css" href="__CSS__/mui.picker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+    <script src="__JS__/mui.picker.min.js" type="text/javascript"></script>
+</head> 
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #dd524d;"></a>
+		<h1 class="mui-title" style="color: #dd524d;">顺风车</h1>
+		<a class="mui-icon fa fa-user mui-pull-right" style="color: #dd524d;" href="{:U('People/index')}"></a>
+	</header>
+	<nav class="mui-bar mui-bar-tab" id="nav">
+		<p class="mui-tab-item mui-active">
+			<span class="mui-icon fa fa-bus"></span>
+			<span class="mui-tab-label">车票预定</span>
+		</p>
+		<p class="mui-tab-item">
+			<span class="mui-icon fa fa-envelope-o">
+				<span class="mui-badge">{$count}</span>
+			</span>
+			<span class="mui-tab-label">消息</span>
+		</p>
+		<p class="mui-tab-item">
+			<span class="mui-icon fa fa-tags"></span>
+			<span class="mui-tab-label">订单中心</span>
+		</p>
+		<p class="mui-tab-item">
+			<span class="mui-icon fa fa-user-circle-o"></span>
+			<span class="mui-tab-label">个人中心</span>
+		</p>
+	</nav>
+	
+	<div class="mui-content" style="background: #fff;padding-bottom: 0px;">
+	    <div class="mui-row fdr">
+	        <div class="mui-col-sm-4 mui-col-xs-4">
+	            <p class="mui-table-view-cell fmz">
+                    	出发城市   
+	            </p> 
+	        </div>
+	        <div class="mui-col-sm-4 mui-col-xs-4">
+	            <p class="mui-table-view-cell fmz"></p>
+	        </div>
+	        <div class="mui-col-sm-4 mui-col-xs-4">
+	            <p class="mui-table-view-cell fmz">
+                   	到达城市 
+	            </p>
+	        </div>
+	        
+	        <div class="mui-col-sm-4 mui-col-xs-4" id='mf'>
+	            <p class="mui-table-view-cell fw" id='from'>
+	            	<present name="Think.session.from">
+						{$Think.session.from.proname}
+						<else /> 郑州
+					</present>
+	            </p> 
+	        </div>
+	        <div class="mui-col-sm-4 mui-col-xs-4">
+	            <p class="mui-table-view-cell fw fp">
+	            	<i class="fa fa-exchange fi" aria-hidden="true"></i>
+	            </p>
+	        </div>
+	        <div class="mui-col-sm-4 mui-col-xs-4" id='mt'>
+	            <p class="mui-table-view-cell fw">
+	            	<present name="Think.session.to">
+						{$Think.session.to.proname}
+						<else /> 长恒
+					</present>
+	            </p>
+	        </div>
+	        
+	    </div>
+	    
+	    <div class="mui-row fdt">
+	        <div class="mui-col-sm-5 mui-col-xs-5">
+	            <p class="mui-table-view-cell">
+                	<i class="fa fa-calendar" aria-hidden="true" style='margin-right: 6px;'></i>
+                	<span style='font-size: 0.9rem;'>出发日期</span>
+	            </p> 
+	        </div>
+	        <div class="mui-col-sm-7 mui-col-xs-7">
+	            <p class="mui-table-view-cell fme">
+                   	<span id='demo2' class='sd bttn' data-options='{"type":"date","beginYear":2017,"endYear":2020}'>{$time|date="Y年m月d日",###}</span>
+	            </p>
+	        </div>
+	    </div>
+	</div>
+	
+	<form action='{Car/index}' method='post'>
+		<input id='fromvalue' type='hidden' name='from' value="<present name="Think.session.from">
+						{$Think.session.from.id}
+						<else /> 21
+					</present>"/>
+		<input id='tovalue' type='hidden' name='to' value="<present name="Think.session.to">
+						{$Think.session.to.id}
+						<else /> 11
+					</present>"/>
+		<input id='timevalue' type='hidden' name='time' value="{$time|date="Y-m-d",###}"/>
+	</form>  
+	<input type='hidden' value="{$Think.session.fl}" id = 'fl'/> 
+
+	<div class='fdt' style='margin: 16px 4% 0px!important;'>
+		<button type="button" id='carshow' class="mui-btn mui-btn-danger mui-btn-block" style='padding: 6px 0;'>查询</button>
+	</div>
+
+     <script type="text/javascript">
+    	var ps = document.getElementById("nav").getElementsByTagName('p');
+    	ps[1].addEventListener("tap",function () {
+		  	window.location.href = '{:U("Car/message")}';
+		});
+		ps[2].addEventListener("tap",function () {
+		  	window.location.href = '{:U("Car/info")}';
+		});
+		ps[3].addEventListener("tap",function () {
+		  	window.location.href = '{:U("People/index")}'
+		});
+		ps[0].addEventListener("tap",function () {
+//		  	window.location.href = '{:U("Index/index")}';
+		});
+    </script> 
+		
+    </script>
+    <script>
+		(function($) {
+			$.init();
+			var btns = $('.bttn');
+			var alltime = document.getElementById('timevalue');
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);    
+					picker.show(function(rs) { 
+						demo2.innerText = rs.y.text + '年' + parseInt(rs.m.text) +'月'+ parseInt(rs.d.text) + '日';
+						timevalue.value = parseInt(rs.y.text) + '-'+ parseInt(rs.m.text) +'-'+ parseInt(rs.d.text);
+						picker.dispose();
+					}); 
+				}, false);
+			});   
+		})(mui); 
+	</script> 
+	
+	<script src="__JS__/jquery-3.0.0.min.js"></script>
+	
+	<script type="text/javascript" src='__JS__/jweixin-1.2.0.js'></script>
+    
+    <script type="text/javascript">
+    	 
+    	var from = document.getElementById('from');
+    	
+		wx.config({
+		    debug: false, 
+		    appId: '{$signPackage["appId"]}',
+			timestamp: {$signPackage["timestamp"]},
+			nonceStr: '{$signPackage["nonceStr"]}',
+			signature: '{$signPackage["signature"]}',
+			jsApiList: [
+			  	// 所有要调用的 API 都要加到这个列表中  
+				'openLocation', 
+				'getLocation'
+		    ]
+		}); 
+		
+		var fl = document.getElementById('fl').value;
+		if (fl == null || fl == undefined || fl == '') { 
+			wx.ready(function () {
+				 wx.getLocation({
+				    type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+				    success: function (res) {
+				        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+				        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180
+				        
+				        var local = latitude + ',' + longitude;   
+				        
+				        $.post("{:U('Index/tolocal')}" , {local : local}, function(data) {
+				        	data = JSON.parse(data);
+				        	if(data.status == 1) {  
+				        		mui.alert('你当前所在的城市是'+data.info, '顺风车', function() {
+									from.innerText = data.info;
+									document.getElementById('fromvalue').value = '0';
+								}); 
+				        	}else if(data.status == 2){
+				        		mui.alert('你当前所在的城市是'+data.info, '顺风车', function() {
+									from.innerText = data.info;
+									document.getElementById('fromvalue').value = data.id;
+								}); 
+				        	}
+				        });
+				    } 
+				});
+			}); 
+		}
+  		
+    </script>
+    
+    <script type="text/javascript">
+    	var mf = document.getElementById('mf');
+    	var mt = document.getElementById('mt');
+    	
+    	mf.addEventListener('tap', function() {
+    		window.location.href = '__CONTROLLER__/selcity/from/10';
+    	});
+    	mt.addEventListener('tap', function() {
+    		window.location.href = '__CONTROLLER__/selcity/to/100';
+    	})
+    	
+    </script>
+    
+    <script type="text/javascript">
+    	var carshow = document.getElementById('carshow');
+    	carshow.addEventListener('tap', function() {
+    		$.post('{:U("Car/index")}', $("form").serialize(), function(data) {
+    			data = JSON.parse(data);
+    			if(data.status == 0) {
+    				mui.alert(data.info); 
+    			}else {
+    				
+    				var fromvalue = document.getElementById('fromvalue').value;
+    				var tovalue = document.getElementById('tovalue').value;
+    				var timevalue = document.getElementById('timevalue').value;
+    				
+    				window.location.href = '__APP__/Home/Car/show/from/'+fromvalue+'/to/'+tovalue+'/time/'+timevalue;	
+    			}
+    		});
+    	});
+    </script>
+    
+</body>
+</html> 

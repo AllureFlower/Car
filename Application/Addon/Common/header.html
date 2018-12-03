@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>猿Sir管理平台</title>
+    <link href="__ROOT__/Public/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__CSS__/common.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__CSS__/module.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__CSS__/default_color.css" media="all">
+     <!--[if lt IE 9]>
+    <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+    <![endif]--><!--[if gte IE 9]><!-->
+    <script type="text/javascript" src="__STATIC__/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="__PLUGS__/layer/layer.js"></script>
+    <!-- <script type="text/javascript" src="__JS__/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="__JS__/highcharts.js"></script>
+    <script type="text/javascript" src="__JS__/exporting.js"></script>
+    <script type="text/javascript" src="__JS__/data.js"></script> -->
+    <!--<![endif]-->
+    <!-- <block name="style"></block> -->
+    
+	<style type="text/css">
+   	::-webkit-scrollbar {width: 8px;height: 8px;}		
+	::-moz-scrollbar {width: 8px;height: 8px;}
+	::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background-color: #f1f1ef;}
+	::-webkit-scrollbar-thumb{border-radius: 4px;-moz-border-radius: 4px; -webkit-border-radius: 4px;background-color: #aaa;}
+   	</style>
+    
+    <div class="header">
+        <span class="logo"><img src="__IMG__/logo.png"></span>
+        <ul class="main-nav">
+            <foreach name='title' item='name'>
+            	<if condition="($Think.session.role_id eq 1) AND ($name.title eq '用户管理') ">
+            	   <elseif condition="($Think.session.role_id eq 1) AND ($name.title eq '地区管理') "/>
+				   <else />   <li class="{$name.class|default=''}"><a href="{$name.url|get_nav_url}">{$name.title}</a></li>
+				</if>
+     
+                <!--<li class="{$name.class|default=''}"><a href="{$name.url|get_nav_url}">{$name.title}</a></li>-->
+            </foreach>
+        </ul>
+        <div class="user-bar">
+            <a href="javascript:;" class="user-entrance"><i class="icon-user"></i></a>
+            <ul class="nav-list user-menu hidden">
+                <li class="manager">你好，<em>{:session('username')}</em></li>
+                <li style="padding: 0 15px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">身份，
+                    <if condition="session('role_id')  eq  0">   root
+                    <elseif condition="session('role_id')  eq  1"/>  管理员
+                    </if>
+                </li>
+                <li><a href="javascript:void(0)">修改昵称</a></li>
+                <li class="logout"><a href="javascript:void(0)">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+         $(".user-bar").mouseenter(function(){
+            var userMenu = $(this).children(".user-menu ");
+            userMenu.removeClass("hidden");
+            clearTimeout(userMenu.data("timeout"));
+        }).mouseleave(function(){
+            var userMenu = $(this).children(".user-menu");
+            userMenu.data("timeout");
+            clearTimeout(userMenu.data("timeout"));
+            userMenu.data("timeout", setTimeout(function(){userMenu.addClass("hidden")}, 100));
+        });
+         $(document).ajaxStart(function(){
+            layer.msg('加载中', {
+               icon: 16,shade: 0.3
+            });
+        }).ajaxStop(function(){});
+        $(".user-bar").children(".user-menu ").children('li').eq(2).click(function(event) {
+            layer.prompt({title: '输入新的昵称', formType: 0}, function(text, index){
+                $.post('{:U('Public/changeName')}', {username:text}, function(data) {
+                    data = JSON.parse(data);
+                    if(data.status == 1) {
+                        layer.close(index);
+                        layer.msg(data.info, {
+                            icon: 1,
+                            time: 1500,
+                            shift:5,
+                            shade:0.3,
+                        });
+                        $('.manager').html('你好，<em>' +data.username+ ' </em>');
+                    }else {
+                        layer.msg(data.info, {
+                            icon: 2,
+                            time: 1500,
+                            shift:6,
+                            shade:0.3,
+                        });
+                    }
+                });
+            });
+        });
+        $('.logout').on('click',function(){
+            layer.confirm('你确定要退出吗？', {
+                btn: ['确定','取消'] 
+            }, function(){
+                window.location.href = "{:U('Public/logout')}";
+            }, function(){});
+        })
+    </script>
+</head>
+<body>

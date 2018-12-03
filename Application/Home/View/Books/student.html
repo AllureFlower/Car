@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>学生管理</title>
+    <script src="__JS__/mui.min.js" type="text/javascript"></script>
+    <link href="__CSS__/mui.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/app.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+    <style>
+    	a {
+    		display: inline!important;
+    	}
+    </style>
+</head>
+<body>
+	  <header class="mui-bar mui-bar-nav">
+	  	<a href="{:U('books/index')}" class="mui-icon mui-icon-left-nav mui-pull-left" style="color: #dd524d;"></a>
+		<h1 class="mui-title" style="color: #dd524d;">学生管理</h1>
+	</header>
+	
+	<div class="mui-content">
+	    <div class="mui-row">
+	    	<div class="mui-col-sm-2 mui-col-xs-2">
+	            <p class="mui-table-view-cell">
+	                   ID
+	            </p>
+	        </div>
+	        <div class="mui-col-sm-3 mui-col-xs-3">
+	            <p class="mui-table-view-cell">
+	                   	姓名
+	            </p>
+	        </div>
+	        <div class="mui-col-sm-3 mui-col-xs-3">
+	            <p class="mui-table-view-cell">
+	                   	班级
+	            </p>
+	        </div>
+	        <div class="mui-col-sm-4 mui-col-xs-4" style="text-align: center;">
+	            <p class="mui-table-view-cell">
+	                   	详情
+	            </p>
+	        </div>
+	    	<foreach name="data" item="vo">
+	    		 <div class="mui-col-sm-2 mui-col-xs-2">
+		            <p class="mui-table-view-cell">
+		                   {$vo.id}
+		            </p>
+		        </div>
+		         <div class="mui-col-sm-3 mui-col-xs-3">
+		            <p class="mui-table-view-cell">
+		                   	{$vo.name}
+		            </p>
+		        </div>
+		        <div class="mui-col-sm-3 mui-col-xs-3">
+		            <p class="mui-table-view-cell">
+		                   	{$vo.class}
+		            </p>
+		        </div>
+	             <div class="mui-col-sm-4 mui-col-xs-4">
+	             	<p class="mui-table-view-cell" style="padding: 
+11px 9px
+;">
+		             	<a class="mui-table-view-cell" style="text-decoration: none;
+    margin-left: 2%;
+    background: #b6af47;
+    color: #fff;
+    border-radius: 19px;
+    padding-top: 6px;
+    padding-bottom: 6px;" href="__CONTROLLER__/student/id/{$vo.id}">
+			            	删除
+			            </a>
+		             	
+			            <a class="mui-table-view-cell" style="text-decoration: none;
+    margin-left: 18%;
+    background: #a54c4c;
+    color: #fff;
+    border-radius: 19px;
+    padding-top: 6px;
+    padding-bottom: 6px;" href="__CONTROLLER__/studentinfo/id/{$vo.id}">
+			            	查看
+			            </a>
+			        </p>
+		        </div>
+			</foreach>
+	    </div>
+	</div>
+	
+</body>
+</html>

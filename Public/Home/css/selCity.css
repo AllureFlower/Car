@@ -1,0 +1,26 @@
+li {
+	list-style: none; 
+}
+.tgct {
+	text-align: center; 	
+	padding: 9px 6px;
+ }
+.ng {
+    padding: 8px 4%;
+    font-size: 0.9rem;
+    padding-top: 10px;
+}
+.bs {
+    margin-bottom: 0;
+    padding: 6px;
+    font-size: 0.9rem;
+}
+.mco {
+    padding-top: 6px;
+    padding-bottom: 4px;
+    background: #fff;
+}
+.nc {
+    color: #dd524d;
+    padding: 5px 4%;
+}

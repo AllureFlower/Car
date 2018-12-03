@@ -1,0 +1,82 @@
+
+li {
+	list-style: none;
+}
+.mui-content{
+	background-color: #fff !important;
+}
+
+.sl {
+    font-size: 0.8rem!important;
+}
+.sc {
+	color: #dd524d;
+}
+.sleft {
+	float: left;
+}
+.sp {
+    padding-top: 6px!important;
+}
+.stx {
+	text-align: center;
+}
+.fps {
+    margin-top: 10px;
+}
+/*
+
+.mui-table-view-cell{
+	list-style: none;
+	padding: 5px 15px !important;
+	text-align: center;
+	font-size: 0.8rem;
+}
+.mui-table-view-cell p{
+	color: #f18639;
+}
+.mui-table-view-cell:after{
+	height: 0 !important;
+}
+.mui-content{
+	padding-top: 25px;
+}
+.mui-btn-outlined{
+	width: 85px;
+}
+p{
+	display: inline-block;
+}
+.cell{
+	margin-top: 10px;
+}
+.fa-exchange:before{
+	font-size: 20px;
+	color:#f18639 ;
+}
+.btns{
+	float: left;
+}
+.btns1{
+	float: right;
+}
+.exchange{
+	display: inline-block;
+}
+.mui-input-clear{
+	
+}
+.confirm{
+	padding: 10px 10px;
+	text-align: center;
+	list-style: none;
+}
+.confirm button{
+	width: 18.6rem;
+	height: 2.4rem;
+    background: #f46c6c;
+    border: none;
+}
+.mui-col-xs{
+	float: left;
+}*/

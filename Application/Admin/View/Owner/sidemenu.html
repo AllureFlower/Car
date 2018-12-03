@@ -1,0 +1,16 @@
+<div id="subnav" class="subnav">
+	<h3>
+		<i class="icon"></i>车主发布管理
+	</h3>
+	<ul class="side-sub-menu subnav-off" style="display: block;">
+		<li class="<if condition='$current eq 1'> current</if>">
+			<a class="item" href="{:U('Owner/complete')}">已发布</a>
+		</li>
+		<li class="<if condition='$current eq 0'> current</if>">
+			<a class="item" href="{:U('Owner/index')}">待审核</a>
+		</li>
+		<li class="<if condition='$current eq 2'> current</if>">
+			<a class="item" href="{:U('Owner/rejected')}">已拒绝</a>
+		</li> 	
+	</ul>
+</div>

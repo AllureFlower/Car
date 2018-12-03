@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>跨城顺风车 </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="__CSS__/mui.css">
+		<link rel="stylesheet" href="__CSS__/reg.css"/>
+		<link rel="stylesheet" href="__CSS__/font-awesome.css"/>
+		<style type="text/css">
+			.layui-layer {
+			    border-radius: 8px!important;
+	    	}
+		</style>
+	</head>
+
+	<body style='background:#fff'>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon fa fa-user  mui-icon-left-nav mui-pull-left" href='{:U("People/index")}'></a>
+			<a id="info" class="mui-icon fa fa-home mui-icon-info-filled mui-pull-right" style="color: #f46c6c;" href='{:U("Index/index")}'></a>
+			<h1 class="mui-title">
+				<div class="title1">{$fromlo.proname}</div>
+				<div class="exchange"><a><i class="fa fa-exchange" aria-hidden="true"></i></a></div>
+				<div class="title2">{$tolo.proname}</div>
+			</h1>
+		</header>
+		   
+		   <div class="mui-content" style='background:#fff'>
+		    <div class="mui-row line">
+		        <div class="mui-col-sm-12 mui-col-xs-12">
+		            <li class="time mui-table-view-cell">
+		             	{$time} 
+		            </li>
+		        </div>
+		    </div>
+		    <foreach name="data" item="vo">
+			    
+		    <div class="mui-row line">
+		        <div class="mui-col-sm-2 mui-col-xs-2">
+		            <li class="mui-table-view-cell zw" style='padding: 11px 0px;text-align: left;padding-top: 15px;    padding-left: 5px;'>
+		               <span>{$vo.time|date="H:i",###}</span> 
+		            </li>
+		            <li class="mui-table-view-cell zw" style='padding: 0px 0px;text-align: left;    padding-left: 5px;'>
+		               <span style='font-size: 0.8rem;'>{$vo.time|de="w",###}</span> 
+		            </li>
+		        </div>
+		        <div class="mui-col-sm-7 mui-col-xs-7" style='width: 61%;padding-left: 4%;'>
+		            <li class="mui-table-view-cell zw" style='margin-top: 10px;'>
+		              	<span>【车主】{$vo.user.name} </span> 
+		            </li>
+		            <li class="mui-table-view-cell zw">
+		              	<span>【车型】{$vo.carmodel}</span>
+		            </li>
+		            <li class="mui-table-view-cell zw" style='max-height: 198px;overflow-y: scroll;'>
+		              	<span>【路线】{$vo.rout}</span>
+		            </li>
+		            <li class="mui-table-view-cell zw">
+		              	<span>【A费】{$vo.money}元</span>
+		            </li>
+		            <li class="mui-table-view-cell zw">
+		              	<span>【备注】{$vo.note}</span>
+		            </li>
+		        </div>
+		        <div class="mui-col-sm-3 mui-col-xs-3" style='width: 22%;'>
+		            <li class="mui-table-view-cell zw" style='margin-top: 10px;text-align: right;'>
+		            	<span>【余座】{$vo.number}</span>
+		            </li>
+		             <li class="btn" style='text-align: right;'>
+		            	<!--<a href='__CONTROLLER__/reservation/id/{$vo.id}'>-->
+		            		<button data='{$vo.number}' data-id='{$vo.id}' class="mui-btn mui-btn-danger reservation" type="button" onclick="return false;">预定</button>
+		            	<!--</a>-->
+		            </li> 
+		        </div>
+    		</div>
+    	</foreach>	
+		     <div class="mui-row">
+		        <div class="mui-col-sm-12 mui-col-xs-12">
+		            <li class="confirm">
+		            	<span><button id='caruser' class="mui-btn mui-btn-danger mui-btn-block" type="button" onclick="return false;">车主发布</button></span>
+		            </li>
+		        </div>
+		    </div>
+
+		    
+		 
+		<script src="__JS__/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+	      	mui.init();
+	    </script>
+        <script src="__JS__/jquery-3.0.0.min.js"></script>
+     <script type="text/javascript">
+    	var caruser = document.getElementById('caruser');
+    	caruser.addEventListener('tap', function() {
+    		$.get("{:U('People/caruser')}",function(data) {
+    			data = JSON.parse(data);
+    			if(data.status) {
+    				mui.alert('请注册你的手机号', '顺风车', function() {
+						window.location.href = "{:U('Phone/index')}";			
+					}); 
+    			}else {
+    				window.location.href = "__APP__/Home/Release/index/from/{$from}/to/{$to}";
+    			}
+    		});
+    	});
+    </script>
+	   
+	 <script type="text/javascript">
+	 	var reservation = $('.reservation');
+	 	for(var i = 0; i < reservation.length; i++) {
+	 		reservation[i].addEventListener('tap', function() {
+//	 			window.location.href = '__CONTROLLER__/showitem/id/' + ;
+				var number = $(this).attr('data');
+				var id = $(this).attr('data-id');
+				if(number > 0) {
+					window.location.href = '__CONTROLLER__/showitem/id/'+id;
+				}else {
+					mui.alert('对不起，暂无预定座位，请选下一班车'); 
+				}
+		 	})
+	 	}
+	 </script>
+	   
+	</body>
+
+</html>

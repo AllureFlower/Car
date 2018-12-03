@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>个人中心</title>
+    <script src="__JS__/mui.min.js" type="text/javascript"></script>
+    <link href="__CSS__/mui.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/app.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css"/>
+</head>
+<body style="background: #fff;">
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #dd524d;"></a>
+		<h1 class="mui-title" style="color: #dd524d;">手机号绑定</h1>
+	</header>
+	<form action='' method='post'>
+	<div class="mui-content">
+		<div class='dshow'>
+			<p class="mp">短信验证码已发送，请填写验证码</p>
+			<p style="font-size: 1rem;color: #000;">修改的手机号&nbsp;&nbsp;{$data.phone}</p>
+		
+			<div class="tl">
+				<input type="number" name='nuidt' id='nuidt' class="mui-input-clear mcl" placeholder="请输入验证码" data-input-clear="5">
+			</div>
+			<input type='hidden' name='nitd' value='{$data.idt}' />
+			<input type='hidden' name='phone' value='{$data.phone}' />
+			<button type="button" id='nb' class="mui-btn mui-btn-danger mui-btn-block" style="padding: 8px 0; margin-top: 10px;background: #dd524d;">确定</button>
+		</div>
+	</div>
+	</form>	
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+    
+     <script src="__JS__/jquery-3.0.0.min.js"></script>
+     
+     <script type="text/javascript">
+     	var nuidt = document.getElementById('nuidt');
+     	var nb = document.getElementById('nb');
+     	nb.addEventListener('tap', function() {
+     		$.post("{:U('Phone/updateIdent')}", $("form").serialize(), function(data) {
+     			 data = JSON.parse(data);
+     			 if(data.status) { 
+     			 	 mui.alert(data.info, '顺风车', function() {
+						window.location.href = "{:U('People/index')}";		
+					});	
+     			 }else {
+     			 	mui.alert('你的验证码错误', function() {
+						window.location.href = "{:U('Phone/update')}";		
+					});
+     			 }
+     		});
+     	})
+     </script>
+    
+</body>
+</html>

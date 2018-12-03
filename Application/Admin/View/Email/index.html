@@ -1,0 +1,130 @@
+{:hook('header')} 
+<link rel="stylesheet" type="text/css" href="__PLUGS__/font-awesome/css/font-awesome.min.css"/>
+<include file = 'Picker/index'/>  
+<link rel="stylesheet" type="text/css" href="__CSS__/other.css" media="all">
+<link rel="stylesheet" href="__PLUGS__/editor/css/editormd.css" /> 
+<div class="sidebar">
+    <include file = 'Email/sidemenu'/>   
+</div>
+<div id="main-content" style="margin-left: 200px;margin-top: 50px">
+<div class="bgemil">
+<form action="{:U('Email/index')}" method="post">
+    <div class="email">
+        <div class="email-nav">
+            <ul>
+                <li class="current">普通邮件</li>
+            </ul>
+        </div>
+        <div class="clear email-send">
+            <input type="button" class="send" value="发送" id="send">
+        </div>
+        <div class="email-ready">
+            <div class="emailuser">
+                <label for="user" class="email-label">收件人</label>
+                <input type="email" name="user" id="user" style="width: 50%" readonly value='feng_pan26@126.com' />
+            </div>
+            <div class="emiltheme emailuser">
+                <label for="theme" class="email-label">主题</label>
+                <input type="text" name="theme" id="theme" style="width: 80%"  />
+            </div>
+            <div class="emiltheme emailuser">
+                <label class="tlabel" style="float: left;margin-right: 8px;color: #fff;">正文</label>
+                <div id="test-editormd" style="min-height: 150px;display: inline-block;background: #fff;">
+                    <textarea style="display:none;" name="text"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div> 
+</div> 
+<script src="__PLUGS__/editor/examples/js/jquery.min.js"></script>
+<script src="__PLUGS__/editor/editormd.js"></script>
+<script type="text/javascript">
+    $(function() {            
+        editormd.emoji     = {
+            path  : "__PLUGS__/editor/examples/images/emojis/",
+            ext   : ".png"
+        };    
+        var testEditor = editormd("test-editormd", {
+            width: "90%",
+            autoHeight : true,
+            path : '__PLUGS__/editor/lib/',
+            imageUpload : true,
+            emoji : true,
+            lineNumbers : false,
+            placeholder : '',
+            styleActiveLine : false,
+            watch : false,
+            dialogMaskOpacity : 0.1,
+            imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "__PLUGS__/editor/examples/php/upload.php?test=dfdf",
+
+            toolbarIcons : function() {
+                return ["bold", "italic","uppercase", "link", "image", "emoji", "list-ul", "list-ol", "code", "quote",  "clear","search", "||", "fullscreen",]
+            },
+            toolbarIconsClass : {
+                fullscreen : "fa-expand"  // 指定一个FontAawsome的图标类
+            },
+            // 用于增加自定义工具栏的功能，可以直接插入HTML标签，不使用默认的元素创建图标
+            toolbarCustomIcons : {
+                file   : "<input type=\"file\" accept=\".md\" />",
+                faicon : "<i class=\"fa fa-star\" onclick=\"alert('faicon');\"></i>",
+            },
+            onload : function(){
+                $("[type=\"file\"]").bind("change", function(){
+                    alert($($(this)).val());
+                    testEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), testEditor);
+                });
+            },
+            onfullscreen : function() {
+                testEditor.watch();
+                $('.sidebar').hide();
+            },
+
+            onfullscreenExit : function() {
+                testEditor.unwatch();
+                $('.sidebar').show();
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(document).ajaxStart(function(){
+        layer.msg('加载中', {
+          icon: 16
+          ,shade: 0.3
+        });
+    }).ajaxStop(function(){
+            
+    });
+
+    var url = "{:U('Email/index')}";
+    $('#send').on('click', function(){
+        var data = $("form").serialize();
+        $.post(url, data, function(data) {
+            var obj = JSON.parse(data);
+            if( obj.status == 0) {
+                layer.msg(obj.info, {
+                  icon: 1,
+                  time: 2000,
+                  shift:5,
+                  shade:0.3,
+                });
+                $('form')[0].reset();
+                $('.CodeMirror-code').html('');
+            }else {
+                layer.msg(obj.info, {
+                  icon: 2,
+                  time: 2000,
+                  shift:6,
+                  shade:0.3,
+                });
+            }
+        });
+    });
+</script>
+{:hook('foot')}

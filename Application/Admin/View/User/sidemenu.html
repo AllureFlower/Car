@@ -1,0 +1,33 @@
+<div id="subnav" class="subnav" >
+	<h3>
+		<i class="icon"></i>用户管理
+	</h3>
+	<ul class="side-sub-menu subnav-off sildemenu" style="display: block;">
+		<li class="<if condition='$current eq 1'> current</if>">
+			<a class="item" href="{:U('User/index')}">普通用户</a>
+		</li>
+		<li class="<if condition='$current eq 0'> current</if>">
+			<a class="item" href="{:U('User/refuse')}">已禁用用户</a>
+		</li>	
+	</ul>
+	
+	<h3>
+		<i class="icon"></i>管理员管理
+	</h3>
+	<ul class="side-sub-menu subnav-off" style="display: block;">
+		<li class="<if condition='$current eq 2'> current</if>">
+			<a class="item" href="{:U('User/member')}">管理员列表</a>
+		</li>
+<!--		
+		<li class="<if condition='$current eq 3'> current</if>">
+			<a class="item" href="{:U('Order/tuidingcom')}">添加管理员</a>
+		</li>
+		<li class="<if condition='$current eq 4'> current</if>">
+			<a class="item" href="{:U('Order/tuiding')}">修改管理员</a>
+		</li>
+		<li class="<if condition='$current eq 5'> current</if>">
+			<a class="item" href="{:U('Order/tuidingrej')}">删除管理员</a>
+		</li> 	
+-->
+	</ul>
+</div>

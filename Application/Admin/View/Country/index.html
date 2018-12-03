@@ -1,0 +1,145 @@
+{:hook('header')}
+
+<link rel="stylesheet" type="text/css" href="__PLUGS__/font-awesome/css/font-awesome.min.css"/>
+<include file = 'Picker/index'/>   
+<div class="sidebar">
+    <include file = 'Country/sidemenu'/>   
+</div>
+<link rel="stylesheet" href="__PLUGS__/layui/css/layui.css"  media="all">
+<script src="__PLUGS__/layui/layui.js" charset="utf-8"></script>
+
+<style type="text/css">
+	.layui-btn+.layui-btn {
+    margin-left: 0px!important;
+    margin-top: 5px!important;
+}
+.layui-btn {margin-top: 5px;    margin-right: 10px;}
+.main-nav li a:hover {
+	color: #fff!important;
+}
+
+</style>
+
+<div id="main-content" style="margin-left: 200px;margin-top: 50px">
+  
+<div style='position: relative;top: 12px;'>
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+	  <legend>地区列表分类展示</legend>
+	</fieldset>
+</div>
+<div class="layui-collapse" lay-accordion="">
+	<foreach name="data" item="vo">
+	     <div class="layui-colla-item">
+		    <h2 class="layui-colla-title">{$vo.proname}</h2>
+		    <div class="layui-colla-content" style='position: relative;    min-height: 42px;'>
+		    	
+		    		<foreach name="vo._child" item="list">
+		    		<button class="layui-btn">{$list.proname}
+		    			<i class="layui-icon edit" data-id='{$list.id}' data='{$list.proname}' style='margin-left: 20px;'></i> 
+		    			<i class="layui-icon del" data-id='{$list.id}' data='{$list.proname}'></i>
+		    		</button>
+	    			</foreach>
+		     	<div class="layui-btn-group" style='position: absolute;  right: 20px;top: 12px;' data-pid='{$vo.id}' data='{$vo.proname}' >
+			    	<button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+			  	</div>
+		    </div>
+		  </div>
+	</foreach>
+          
+<script>
+layui.use(['element', 'layer'], function(){
+  var element = layui.element;
+  var layer = layui.layer;
+  element.on('collapse(test)', function(data){});
+});
+</script>
+<script type="text/javascript">
+	var curty = {$Think.session.curty};
+	$('.layui-colla-content').eq(curty).addClass('layui-show');
+</script>
+
+<script type="text/javascript">
+	$('.edit').click(function(){
+		var id = $(this).attr('data-id');
+		var local = $(this).attr('data');
+		var url = '__CONTROLLER__/edit'
+		var item = $(this).parent('.layui-btn').parent('.layui-colla-content').parent('.layui-colla-item').index();
+		layer.prompt({title: '输入修改的地区', formType: 0, value:local}, function(text, index){
+		  	layer.close(index);
+		  	$.post(url, {id:id,proname:text,curty:item}, function(data){
+		  		if(data.status) {
+		  			layer.msg(data.info, {icon: 1,time: 1000}, function(){
+		  				window.location.href = '{:U("Country/index")}';
+		  			});
+		  		}else {
+		  			layer.msg(data.info, {
+		                icon: 2,
+		                time: 2000,
+		                shift:6,
+		                shade:0.3,
+		            });
+		  		}
+		  	}, 'json');
+		  	
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$('.layui-btn-group').click(function(){
+		var pid = $(this).attr('data-pid');
+		var data = $(this).attr('data');
+		var url = '__CONTROLLER__/add';
+		var item = $(this).parent('.layui-colla-content').parent('.layui-colla-item').index();
+		
+		layer.prompt({title: '输入待添加的地区，此分类为 '+data+' 首字母大写', formType: 0}, function(text, index){
+		  	layer.close(index);
+		  	$.post(url, {pid:pid,proname:text,curty:item}, function(data){
+		  		if(data.status) {
+		  			layer.msg(data.info, {icon: 1,time: 1000}, function(){
+		  				window.location.href = '{:U("Country/index")}';
+		  			});
+		  		}else {
+		  			layer.msg(data.info, {
+		                icon: 2,
+		                time: 2000,
+		                shift:6,
+		                shade:0.3,
+		            });
+		  		}
+		  	}, 'json');
+		  	
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$('.del').click(function() {
+		var id = $(this).attr('data-id');
+		var proname = $(this).attr('data');
+		var string = '你确定要删除 '+proname+' 地区吗？';
+		var url  ='__CONTROLLER__/del'; 
+		var item = $(this).parent('.layui-btn').parent('.layui-colla-content').parent('.layui-colla-item').index();
+		
+		layer.confirm(string, {icon: 3, title:'提示',time: 1000}, function(){
+			 
+			$.post(url, {id:id, curty:item}, function(data){ 
+				if(data.status) {
+					layer.msg(data.info, {icon: 1},function(){				
+						window.location.href = '{:U("Country/index")}'; 
+					});
+					
+				}else {
+					layer.msg(data.info, { 
+						icon: 2, 
+						time: 2000,
+						shift:6,
+						shade:0.3,
+					}); 
+				}
+			},'json'); 
+		}); 
+	});
+</script>
+ 	
+</div>

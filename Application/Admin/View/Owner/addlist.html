@@ -1,0 +1,47 @@
+<div class="main-title">
+	<h2>新增幻灯图片</h2>	
+</div>
+<div class="tab-wrap">
+	<div class="tab-content">
+		<form action="" method="post" class="form-horizontal">
+			<!-- 基础 -->
+			<div id="tab1" class="tab-pane in tab1">
+			
+				<div class="form-item">
+					<label class="item-label">
+						幻灯图片名称
+					</label>
+					<div class="controls">
+						<input type="text" name="title" class="text input-large" value="">
+					</div>
+				</div>
+				
+				<div class="form-item">
+					<label class="item-label">链接<span class="check-tips"></span></label>
+					<div class="controls">
+						<input type="text" name="url" class="text input-large" value="">
+					</div>
+				</div>
+			</div>
+
+			<div class="controls">
+				<label class="item-label">图片</label>
+				<input type="file" id="upload_picture">
+				<input type="hidden" name="icon" id="icon" value="{$info['icon']|default=''}"/>
+				<div class="upload-img-box">
+				<notempty name="info['icon']">
+					<div class="upload-pre-item"><img src="{$info.icon|get_cover='path'}"/></div>
+				</notempty>
+				</div>
+			</div>
+
+
+			<div class="form-item">
+				<input type="hidden" name="id" value="">
+				<input type="hidden" name="pid" value="">
+				<button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+				<button class="btn btn-return">返 回</button>
+			</div>
+		</form>
+	</div>
+</div>

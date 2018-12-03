@@ -1,0 +1,74 @@
+{:hook('header')} 
+<script type="text/javascript" src="__STATIC__/jquery-3.2.1.min.js"></script>
+<script src="__PLUGS__/highcharts/code/highcharts.js"></script>
+<script src="__PLUGS__/highcharts/code/modules/exporting.js"></script>
+<script src="__PLUGS__/highcharts/code/highcharts-zh_CN.js"></script>
+
+
+<div id="container" style="min-width:400px;height:400px;margin-top: 60px;"></div>
+
+<script type="text/javascript">
+   $(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '2017年数据统计'
+        },
+        subtitle: {
+            text: '数据来源:猿Sir管理系统'
+        },
+        xAxis: {
+            categories: [
+                '一月',
+                '二月',
+                '三月',
+                '四月',
+                '五月',
+                '六月',
+                '七月',
+                '八月',
+                '九月',
+                '十月',
+                '十一月',
+                '十二月'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '数量 (个)'   
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} 个</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '用户数',
+            data: {$u_count}
+        }, {
+            name: '车主发布数',
+            data: {$r_count}
+        }, {
+            name: '交易数',
+            data: {$t_count}
+        }, {
+            name: '反馈数',
+            data: {$f_count}   
+        }]
+    });
+});
+</script>

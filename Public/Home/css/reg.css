@@ -1,0 +1,75 @@
+.line{
+	border-bottom: 1px dotted #f46c6c;
+    padding-bottom: 6px;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.mui-icon{
+	color: #f46c6c;
+}
+
+.title1{
+	float: left;
+	width: 35%;
+	text-align: center;
+	line-height: 50px;
+}
+.title2{
+	float: left;
+	width: 35%;
+	text-align: center;
+	line-height: 50px;
+}
+.exchange{
+	float: left;
+	width: 30%;
+	text-align: center;
+	color: #f46c6c; 
+	font-size: 1.4rem;
+    line-height: 48px;
+}
+.time{
+	font-size: 0.8rem;
+	color:#f46c6c;
+	padding-bottom: 0px !important;
+}
+li{
+	list-style: none;
+}
+.mui-table-view-cell:after {
+    background-color: #ffffff;
+} 
+.zw{
+	padding-bottom: 0px;
+	font-size: 0.9rem;
+}
+.cell{
+	font-size: 0.9rem !important;
+}
+.btn{
+    padding-top: 10px;
+	text-align: center;
+}
+.btn button{
+    padding: 3px 14px;
+    background: #f46c6c;
+    border: none;
+}
+.confirm{
+	padding: 10px 10px;
+	text-align: center;
+	list-style: none;
+}
+.confirm button{
+    background: #f46c6c;
+    border: none;
+    padding: 8px;
+    font-size: 0.9rem; 
+}
+.mui-table-view-cell {
+    position: relative;
+    overflow: hidden;
+    padding: 0 0px;
+    -webkit-touch-callout: none;
+    padding-top: 6px;
+}

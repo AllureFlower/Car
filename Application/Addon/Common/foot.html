@@ -1,0 +1,10 @@
+<script type="text/javascript">
+$(function(){
+    $(".user-bar").mouseenter(function(){
+        $(this).children(".user-menu ").removeClass("hidden");
+    }).mouseleave(function(){
+        var userMenu = $(this).children(".user-menu");
+        setTimeout(function(){userMenu.addClass("hidden")}, 100);
+    });
+})
+</script>

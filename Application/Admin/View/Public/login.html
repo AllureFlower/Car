@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>欢迎您登录猿Sirshop</title>
+            <link href="__ROOT__/Public/favicon.ico" type="image/x-icon" rel="shortcut icon">
+        <link rel="stylesheet" type="text/css" href="__CSS__/login.css" media="all">
+       	<link rel="stylesheet" type="text/css" href="__CSS__/default_color.css" media="all">
+       	<style type="text/css">
+       	::-webkit-scrollbar {width: 8px;height: 8px;}		
+		::-moz-scrollbar {width: 8px;height: 8px;}
+		::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background-color: #f1f1ef;}
+		::-webkit-scrollbar-thumb{border-radius: 4px;-moz-border-radius: 4px; -webkit-border-radius: 4px;background-color: #aaa;}
+       	</style>
+    </head>
+    <body id="login-page">
+        <div id="main-content">
+
+            <!-- 主体 -->
+            <div class="login-body">
+                <div class="login-main pr"> 
+                   <form action="{:U('Public/login')}" method="post" class="login-form">
+                        <h3 class="welcome"><i class="login-logo"><img height="40" width="40" src="__IMG__/i.png"></i>猿Sir管理平台</h3>
+                        <div id="itemBox" class="item-box">
+                            <div class="item">
+                                <i class="icon-login-user"></i>
+                                <input type="text" name="username" placeholder="请填写用户名" autocomplete="off" />
+                            </div>
+                            <span class="placeholder_copy placeholder_un">请填写用户名</span>
+                            <div class="item b0">
+                                <i class="icon-login-pwd"></i>
+                                <input type="password" name="password" placeholder="请填写密码" autocomplete="off" />
+                            </div>
+                            <span class="placeholder_copy placeholder_pwd">请填写密码</span>
+                        </div>
+                        <div class="login_btn_panel">
+                        	<include file='verify' />
+                        </div>
+                        <div class="login_btn_panel" style="margin-top: 15px;">
+                            <button class="login-btn" type="submit">
+                                <span class="in"><i class="icon-loading"></i>登 录 中 ...</span>
+                                <span class="on">登 录</span>
+                            </button>
+                            <div class="check-tips"></div>
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+    <script type="text/javascript">
+    	/* 登陆表单获取焦点变色 */
+    	$(".login-form").on("focus", "input", function(){
+            $(this).closest('.item').addClass('focus');
+        }).on("blur","input",function(){
+            $(this).closest('.item').removeClass('focus');
+        });
+    	$("#itemBox").find("input[name=username]").focus();
+    	
+    	$(document).ajaxStart(function(){
+    		$("button:submit").addClass("log-in").attr("disabled", true);
+    	}).ajaxStop(function(){
+    		$("button:submit").removeClass("log-in").attr("disabled", false);
+    	});
+    	
+    	$("form").submit(function(){
+    		var self = $(this);
+    		var url = self.attr("action");
+    		var data = self.serialize();
+    		$.post(url , data, success, "json");
+    		return false;
+    		function success(data){
+    			if(data.status){
+    				self.find(".check-tips").text(data.info);
+    			}else {
+    				self.find(".check-tips").text('');
+    				window.location.href = '{:U("Index/index")}'
+    			}
+    		}
+    	});
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+{:hook('header')} 
+
+ <!-- 主体 -->
+<div id="indexMain" class="index-main">
+       <!-- 插件块 -->
+   <div class="container-span"> <div class="container-span top-columns cf">
+	<dl class="show-num-mod">
+		<dt><i class="count-icon user-count-icon"></i></dt>
+		<dd>
+			<strong>{$count[0]}</strong>
+			<span>用户数</span>
+		</dd>
+	</dl>
+	<dl class="show-num-mod">
+		<dt><i class="count-icon user-action-icon"></i></dt>
+		<dd>
+			<strong>{$count[1]}</strong>
+			<span>发布数</span>
+		</dd>
+	</dl>
+	<dl class="show-num-mod">
+		<dt><i class="count-icon doc-count-icon"></i></dt>
+		<dd>
+			<strong>{$count[2]}</strong>
+			<span>待审核</span>
+		</dd>
+	</dl>
+	<dl class="show-num-mod">
+		<dt><i class="count-icon doc-modal-icon"></i></dt>
+		<dd>
+			<strong>{$count[3]}</strong>
+			<span>交易数</span>
+		</dd>
+	</dl>
+	<dl class="show-num-mod">
+		<dt><i class="count-icon category-count-icon"></i></dt>
+		<dd>
+			<strong>{$count[4]}</strong>
+			<span>反馈数</span>
+		</dd>
+	</dl>
+</div><div class="span2">
+	<div class="columns-mod">
+		<div class="hd cf">
+			<h5>系统信息</h5>
+			<div class="title-opt">
+			</div>
+		</div>
+		<div class="bd">
+			<div class="sys-info">
+				<table>
+					<tbody>
+					<tr>
+						<th>服务器操作系统</th>
+						<td>{$Think.const.PHP_OS}</td>
+					</tr>
+					<tr>
+						<th>ThinkPHP版本</th>
+						<td>ThinkPHP {$Think.VERSION} beta</td>
+					</tr>
+					<tr>
+						<th>运行环境</th>
+						<td>{$_SERVER['SERVER_SOFTWARE']}</td>
+					</tr>
+					<tr>
+						<th>MYSQL版本</th>
+						<td>{$config.mysql.0.v}</td>
+					</tr>
+					<tr>
+						<th>最大执行时间</th>
+						<td>{$config.loadtime}秒</td>
+					</tr>
+					<tr>
+						<th>ZEND版本</th>
+						<td>{$config.zend} beta</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div><div class="span2">
+	<div class="columns-mod">
+		<div class="hd cf">
+			<h5>平台开发信息</h5>
+			<div class="title-opt">
+			</div>
+		</div>
+		<div class="bd">
+			<div class="sys-info">
+				<table>
+					<tbody><tr>
+						<th>运行环境</th>
+						<td>微信公众号  ---  猿Sir</td>
+					</tr>
+					<tr>
+						<th>平台名称</th>
+						<td>基于PHP的顺风车平台开发</td>
+					</tr>
+					<tr>
+						<th>开发框架</th>
+						<td>MUI</td>
+					</tr>
+					<tr>
+						<th>登录方式</th>
+						<td><img width='100' src='__PUBLIC__/Admin/images/0.jpg' /></td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div></div>
+    </div>
+
+       </div>
+   </div>

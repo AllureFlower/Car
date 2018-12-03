@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>学生管理</title>
+    <script src="__JS__/mui.min.js" type="text/javascript"></script>
+    <link href="__CSS__/mui.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/app.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	  <header class="mui-bar mui-bar-nav">
+	  	<a href="{:U('books/index')}" class="mui-icon mui-icon-left-nav mui-pull-left" style="color: #dd524d;"></a>
+		<h1 class="mui-title" style="color: #dd524d;">学生管理</h1>
+	</header>
+	
+	<div class="mui-content">
+	    <div class="mui-row">
+	        <div class="mui-col-sm-6 mui-col-xs-12">
+	            <span class="mui-table-view-cell">
+	               <form action="" method="post" style="background: #fff;">
+						<div class="mui-input-row">
+							<label>姓名</label>
+							<input type="text" name="name" placeholder="请输入姓名">
+						</div>
+						<div class="mui-input-row">
+							<label>专业</label>
+							<input type="text" name="class" placeholder="请输入专业">
+						</div>
+						<div class="mui-input-row">
+							<label>宿舍</label>
+							<select name="sno" >
+								<foreach name="select" item="vo">
+								    <option value="{$vo.id}">{$vo.name}</option>
+								</foreach>
+							</select>
+						</div>
+						<button type="submit" class="mui-btn mui-btn-warning mui-btn-block">添加</button>
+	               </form>
+	            </span>
+	        </div>
+	    </div>
+	</div>
+	
+	
+	
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>消息中心</title>
+    <script src="__JS__/mui.min.js" type="text/javascript"></script>
+    <link href="__CSS__/mui.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/app.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css"/>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #dd524d;"></a>
+		<h1 class="mui-title" style="color: #dd524d;">消息中心</h1>
+			<a class="mui-icon fa fa-user mui-pull-right" style="color: #dd524d;" href="{:U('People/index')}"></a>
+	</header>
+	<div class="mui-content" style='    margin-bottom: 50px;'>
+		<foreach name='data' item='vo' >
+		<div class="dshow">
+			<div style="padding: 14px 7px;">
+				<div class="dl">
+					<p class="adress">{$vo.localfrom.proname}&nbsp;-&nbsp;{$vo.localto.proname}</p>
+					<p>{$vo.time|date="Y-m-d H:i",###}&nbsp;</p>
+					<p>定座  {$vo.number}人</p> 
+					
+					<if condition="$vo.message eq '' "><p>备注：暂无备注消息</p>
+					<else /> <p>备注：{$vo.message}</p>
+					</if>			
+				</div>
+				<div class="dr"> 
+					<p style="color: #dd524d;">
+						<button data='{$vo.id}'  type="button" class="mui-btn mui-btn-danger agree" style="padding: 4px 15px;">
+							同意
+						</button> 
+						<a href='__CONTROLLER__/refused/id/{$vo.id}'  type="button" class="mui-btn mui-btn-warning" style="padding: 4px 15px;margin-top: 10px;">
+							拒绝
+						</a> 
+						<a href='__CONTROLLER__/messageinfo/id/{$vo.id}' class="mui-btn mui-btn-success" style="padding: 4px 15px;margin-top: 10px;">
+							查看
+						</a> 
+					</p>
+				</div>
+			</div>
+		</div>
+		</foreach>
+	</div>
+  
+	<script type="text/javascript" charset="utf-8">
+      	mui.init();
+   </script>
+   
+   	<nav class="mui-bar mui-bar-tab" id="nav">
+		<p class="mui-tab-item">
+			<span class="mui-icon fa fa-bus"></span>
+			<span class="mui-tab-label">车票预定</span>
+		</p>
+		<p class="mui-tab-item mui-active">
+			<span class="mui-icon fa fa-envelope-o">
+				<span class="mui-badge" style='background: #dd524d;'>{$count}</span>
+			</span>
+			<span class="mui-tab-label">消息</span>
+		</p>
+		<p class="mui-tab-item">
+			<span class="mui-icon fa fa-tags"></span>
+			<span class="mui-tab-label">订单中心</span>
+		</p>
+		<p class="mui-tab-item">
+			<span class="mui-icon fa fa-user-circle-o"></span>
+			<span class="mui-tab-label">个人中心</span>
+		</p>
+	</nav>
+	
+	<script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+    <script type="text/javascript">
+    	var ps = document.getElementById("nav").getElementsByTagName('p');
+    	ps[1].addEventListener("tap",function () {
+		  	window.location.href = '{:U("Car/message")}';
+		});
+		ps[2].addEventListener("tap",function () {
+		  	window.location.href = '{:U("Car/info")}';
+		});
+		ps[3].addEventListener("tap",function () {
+		  	window.location.href = '{:U("People/index")}'
+		});
+		ps[0].addEventListener("tap",function () {
+		  	window.location.href = '{:U("Index/index")}';
+		});
+    </script>
+            <script src="__JS__/jquery-3.0.0.min.js"></script>
+   <script type="text/javascript">
+   var agree = $('.agree');
+   
+   for(var i = 0; i < agree.length; i++) {
+   	agree[i].addEventListener('tap', function() {
+		var idvalue = $(this).attr('data');
+		$.post('{:U("Car/ajcar")}', {id : idvalue}, function(data) {
+			data = JSON.parse(data);
+   			 if(data.status) {
+   			 	mui.alert(data.info, '顺风车', function() {
+					window.location.href = "{:U('Car/message')}";		
+				});
+   			 }else {
+   			 	mui.alert(data.info); 
+   			 }
+		});
+	});
+   }
+   </script>
+</body>
+</html>

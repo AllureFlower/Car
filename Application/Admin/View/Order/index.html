@@ -1,0 +1,177 @@
+{:hook('header')} 
+<link rel="stylesheet" type="text/css" href="__PLUGS__/font-awesome/css/font-awesome.min.css"/>
+<include file = 'Picker/index'/>   
+<div class="sidebar">
+    <include file = 'Order/sidemenu'/>   
+</div>
+
+<div id="main-content" style="margin-left: 200px;margin-top: 50px">
+    <div class="main" style="min-height: 483px;">    
+		<div class="showlist">
+			<div class="main-title">
+				<h2>待确认</h2>
+			</div>
+		    <div class="cf">
+				<!--<div class="fl ss">
+		            <button class="btn ajax-post btn_agree" >同 意</button>
+				</div> -->
+				
+				<!-- 高级搜索 -->
+				<div class="search-form fr cf">
+					<div class="sleft">
+						<div class="drop-down">
+							<span id="sch-sort-txt" class="sort-txt" style='margin-right: -3px;'>日 期</span>
+							<i class="fa fa-calendar-check-o"></i>
+						</div>
+						<input type="text" name="time" class="search-input" id='time' value="" placeholder="点击选择日期">
+
+						<a class="sch-btn" href="javascript:;" id="search" url="/OneThink/admin.php?s=/article/index/pid/0"><i class="btn-search"></i></a>
+					</div>
+		            <div class="btn-group-click adv-sch-pannel fl fls bgcom">
+		                <button class="btn">搜 索<i class="fa fa-support" style='margin-left: 8px;'></i></button>
+		            </div>
+				</div>
+			</div>
+    		<!-- 数据列表 -->
+   	 		<div class="data-table table-striped">
+				<table>
+	    		<!-- 表头 -->
+				    <thead>
+				        <tr>
+				            <!--<th class="row-selected row-selected">
+				                <input class="check-all" type="checkbox">
+				            </th>-->
+				            <th>编号</th>
+				            <th>乘客（手机号）</th> 
+				            <th>车主（手机号）</th> 
+				            <th>路线</th>
+				            <th>车型</th>
+				            <th>定/余/总座</th>
+				            <th>留言</th>
+				            <th>状态</th>
+				            <th>预定日期 </th>     
+				            <th>出发日期 </th>     
+				            <th>操作</th>   
+				        </tr>
+				    </thead>
+		
+				    <!-- 列表 -->
+				    <tbody>
+				    	<foreach name="data" item="vo">
+				        <tr>
+					        <!--<td><input class='ids' type="checkbox" data-from='{$vo.from.proname}' data-to='{$vo.to.proname}' value="{$vo.id}" name="ids"></td>-->
+					        <td>{$vo.id}</td>  
+					        <td>{$vo.passengers.name}{$vo.passengers.phone}</td> 
+					        <td>{$vo.owner.name}{$vo.owner.phone}</td> 
+					        <td>{$vo.from.proname}-{$vo.to.proname}</td> 
+					        <td>{$vo.release.carmodel}</td> 
+					        <td style='text-align: center;'>{$vo.number}/{$vo.release.number}/{$vo.release.count}人</td> 
+					        <td style='max-width: 200px;'>{$vo.message}</td> 
+					         <td>待确认</td> 
+					        <td>{$vo.time|date='Y-m-d',###}</td> 
+					        <td>{$vo.release.time|date='Y-m-d',###}</td>     
+					        <td>  
+					        	<if condition="$vo.oldOrder eq 1"> <a href="javascript:void(0)" style='color: #000;font-size: 12px;' >已过期</a>
+								<else />
+								<!--<a class='agree' href="javascript:void(0)" data-id='{$vo.id}' data-from='{$vo.from.proname}' data-to='{$vo.to.proname}'>同意</a>--> 
+					        	<a class='refused' href="javascript:void(0)" data-id='{$vo.id}' data='乘客  {$vo.passengers.name}  {$vo.from.proname}到{$vo.to.proname}'>禁止</a>
+								</if>
+					        	<a href="javascript:void(0)" class='show' data-id='{$vo.id}' >查看</a>
+					        </td> 
+					        <input type='hidden' class='debug' value='<if condition="$vo.time gt time()">  -1
+					        <else />  1
+					        </if>' />
+					        </tr>
+				        </foreach>
+				    </tbody>
+				</table>
+			</div>
+	    	<div class="page">
+	    		{$show}
+	    	</div>
+		</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	$('.show').click(function() {
+		var id = $(this).attr('data-id');
+		layer.open({
+			type: 2,
+			title: '',
+			shadeClose: true,
+			shade: 0.8,
+			area: ['80%', '90%'],
+			content: '__CONTROLLER__/show/id/'+id, 
+		});
+	});
+</script>
+
+<script type="text/javascript">
+    $('#time').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+	    minView:2,
+	    autoclose:true
+    });
+</script>
+
+<script type="text/javascript">
+	$("#search").click(function(){
+        var time  = $('.search-form').find('input').val();
+       	if(time == '') {
+       		layer.msg('请先选择日期', {
+                icon: 2,
+                time: 2000,
+                shift:6,
+                shade:0.3,
+            });
+       	}else {
+       		window.location.href = '__CONTROLLER__/index/time/'+time;;
+       	}
+	});
+	$(".bgcom").click(function(){
+        var time  = $('.search-form').find('input').val();
+       	if(time == '') {
+       		layer.msg('请先选择日期', {
+                icon: 2,
+                time: 2000,
+                shift:6,
+                shade:0.3,
+            });
+       	}else {
+       		window.location.href = '__CONTROLLER__/index/time/'+time;;
+       	}
+	});
+</script>
+<script type="text/javascript">
+	$('.refused').click(function() {
+		
+		var id= $(this).attr('data-id');
+		var data = $(this).attr('data');
+		
+		layer.confirm('你确定禁止'+data+'   的预定纪录？', {icon: 3, title:'提示'}, function(){
+		  	
+		  	$.get('{:U("Order/refused_d")}',{id:id}, function(data){
+		  		if(data.status) {
+		  			layer.msg(data.info, {
+						icon: 1,
+						time: 2000,
+						shift:5,
+						shade:0.3,
+	                },function(){
+	                	window.location.href = '{:U("Order/rejected")}';
+	                });
+		  		}else {
+		  			layer.msg(data.info, {
+		                icon: 2,
+		                time: 2000,
+		                shift:6,
+		                shade:0.3,
+		            });
+		  		}
+		  	},'json');
+		  	
+		});
+	})
+</script>

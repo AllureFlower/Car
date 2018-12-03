@@ -1,0 +1,148 @@
+/*
+ *这是单独为hello mui准备的个性化css，可以覆盖标准mui的css定义；
+ * 在实际项目开发时，建议为App单独写一个css文件，从而实现项目的自定义皮肤功能；
+ * 
+ * */
+.mui-plus header.mui-bar{
+	display: none;
+}
+.mui-plus .mui-bar-nav~.mui-content{
+	padding: 0;
+}
+
+.mui-bar-nav > h1 {
+	color: #007aff;
+}
+.top_left {
+	float: left;
+	width: 25%;
+}
+.limg {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+}
+.limg > img {
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+}
+.top_right {
+	float: left;
+	width: 75%;
+}
+.headbg {
+	background: #fff;
+	overflow: hidden;
+    padding: 20px 4%;
+    margin-bottom: 10px;
+}
+.top_name {
+    font-size: 1rem;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.act {
+	font-size: 0.8rem;
+}
+.rnav {
+	margin-top: 5px;
+}
+
+.dingdan {
+	background: #fff;
+	overflow: hidden;
+    padding: 0px 4%;
+    margin-bottom: 1px;
+}
+.dingdan>p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    color: #000000;
+    line-height: 36px;
+}
+.now {
+	margin-left: 10px;
+}
+.dshow {
+	background: #fff;
+	overflow: hidden;
+    padding: 0px 4%;
+    margin-bottom: 1px;
+}
+.dl {
+	float: left;
+	width: 75%;
+}
+.dr {
+	float: right;
+	width: 25%;
+	text-align: right;
+}
+.adress {
+	color: #000000;
+    font-size: 1rem;
+}
+.ft {
+	font-size: 0.9rem;
+    float: right;
+    color: #dd524d;
+}
+.fz {
+	font-size: 1.2rem!important;
+}
+.fo {
+	font-size: 1.2rem!important;
+}
+.fc {
+	width: 12px;
+}
+.mp {
+	margin: 60px 0 30px;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #dd524d;
+    line-height: 1.8rem;
+}
+.tl {
+	text-align: center;
+    background: #fff;
+    padding-top: 20px;
+}
+.mcl {
+    margin-bottom: 0;
+    border: 1px solid #ccc;
+    width: 95%;
+    box-shadow: none;
+    margin: 0 auto;
+}
+.fmz {
+	font-size: 0.8rem!important;
+}
+.fw {
+    font-size: 1.4em!important;
+    color: #000;
+}
+.fi {
+	color: #dd524d;
+	font-size: 1em!important;
+}
+.fp {
+	padding-top: 5px!important;
+}
+.fdr {
+	text-align: center;margin: 0px 4%;margin-top: 20px;border-bottom: 1px solid #d0d0d6;
+}
+
+.fdt {
+	text-align: center; margin: 10px 4% 0px!important;
+}
+.fme {
+	text-align: right;
+}
+.sd {
+	color:#dd524d!important;
+	font-size: 0.9rem!important;
+	margin-right: 3px!important;
+}

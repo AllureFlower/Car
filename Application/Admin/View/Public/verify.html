@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+    <link href="__PLUGS__/Verify/css/drag.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .gt_cut_fullbg_slice {
+            float: left;
+            width: 13px;
+            height: 58px;
+            margin: 0 !important;
+            border: 0px;
+            padding: 0 !important;
+            background-image: url("{$pg_bg}");
+        }
+        .xy_img_bord{
+            -webkit-box-shadow:0 0 15px #0CC;
+            -moz-box-shadow:0 0 15px #0CC;
+            box-shadow:0 0 15px #0CC;
+        }
+        #xy_img{
+            background-image: url({$ico_pic['url']});z-index: 999;width: {$ico_pic['w']}px;height:{$ico_pic['h']}px;position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="row put_val" style="width: 260px;overflow: hidden; margin: 0 auto;">
+	<div style="width: 260px;height: 116px;" id="Verification" >
+		<volist name='left_pic' id='vo'>
+			<php>
+				$left_symbol  = $vo[0] == 0 ?'':'-';
+				$right_symbol = $vo[1] == 0 ?'':'-';
+			</php>
+			<div class="gt_cut_fullbg_slice" style="background-position:{$left_symbol}{$vo[0]}px {$right_symbol}{$vo[1]}px;"></div>
+		</volist>
+
+
+		<volist name='right_pic' id='vo'>
+			<php>
+				$left_symbol  = $vo[0] == 0 ?'':'-';
+				$right_symbol = $vo[1] == 0 ?'':'-';
+			</php>
+			<div  class="gt_cut_fullbg_slice" style="background-position:{$left_symbol}{$vo[0]}px  {$right_symbol}{$vo[1]}px;"></div>
+		</volist>
+
+		<div style="top: <?php echo($y_point);?>px;left: 0px;display: none;border: 1px solid white" id="xy_img" class="xy_img_bord"></div>
+	</div>
+	 <div id="drag"></div>
+</div>
+<script type="text/javascript" src="__PLUGS__/Verify/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src='__PLUGS__/Verify/js/drag.js'></script>
+<script>
+     $('#drag').drag();
+</script>
+</body>
+</html>

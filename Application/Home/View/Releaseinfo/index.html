@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>发布中心</title>
+    <script src="__JS__/mui.min.js" type="text/javascript"></script>
+    <link href="__CSS__/mui.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/app.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css"/>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #dd524d;"></a>
+		<h1 class="mui-title" style="color: #dd524d;">发布中心</h1>
+		<a class="mui-icon fa fa-user mui-pull-right" style="color: #dd524d;" href="{:U('People/index')}"></a>
+	</header>
+	<div class="mui-content">
+		
+		<foreach name="data" item="vo">
+		   <div class="dshow">
+				<div style="padding: 14px 7px;">
+					<div class="dl">
+						<p class="adress">{$vo.formname.proname}&nbsp;-&nbsp;{$vo.toname.proname}</p>
+						<p>{$vo.time|date="Y-m-d H:i",###}&nbsp;发车</p>
+						<p>余座/定座：{$vo.number}人/{$vo.count}人</p> 
+					</div>
+					<div class="dr"> 
+						<if condition="$vo.status eq 1"> 
+							<p style="color: #dd524d;">
+								<a href='__CONTROLLER__/carinfomessage/id/{$vo.id}'>
+									<button type="button" class="mui-btn mui-btn-danger" style='padding: 4px 15px;'>
+										查看
+									</button> 
+								</a>
+							</p>
+							<p style="color: rgb(97,214,245);margin-top: 30px;">发布成功</p>
+								<elseif condition="$vo.status eq 0"/>
+							<p style="color: #dd524d;"></p>
+							<p style="color: rgb(185, 167, 125);">正在发布...</p>
+								<else /> 
+							<p style="color: #dd524d;"></p>
+							<p style="color: #f0ad4e;">发布失败</p>
+						</if>
+					</div>
+				</div>
+			</div>
+		</foreach>
+	</div>
+	
+	
+	<nav class="mui-bar mui-bar-tab" id="nav">
+		<p class="mui-tab-item">
+			<span class="fa fa-hand-scissors-o"></span>
+			<span class="mui-tab-label">已发布</span>
+		</p>
+		<p class="mui-tab-item mui-active">
+			<span class="fa fa-hand-paper-o"></span>
+			<span class="mui-tab-label">待发布</span>
+		</p>
+		<p class="mui-tab-item">
+			<span class="mui-icon fa fa-bus"></span>
+			<span class="mui-tab-label">未发布</span>
+		</p>
+	</nav>
+	
+	<script type="text/javascript" charset="utf-8">
+      	mui.init();
+   </script>
+</body>
+</html>

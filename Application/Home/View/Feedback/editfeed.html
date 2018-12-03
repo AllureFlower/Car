@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>反馈信息确认</title>
+    <script src="__JS__/mui.min.js" type="text/javascript"></script>
+    <link href="__CSS__/mui.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/app.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css"/>
+    <style type="text/css">
+    	.btns {    padding: 8px 0;
+    width: 96%;
+    margin: 0 auto;
+    font-size: 0.9rem;}
+    .dl p {    
+    	font-size: 0.8rem;
+    }
+    </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #dd524d;"></a>
+		<h1 class="mui-title" style="color: #dd524d;">反馈信息确认</h1>
+	</header>
+	<div class="mui-content" style='margin-bottom: 50px;'>
+		<p style='margin: 5px; font-size: 0.8rem;text-align: center;'>温馨提示：请认真审查后再进行车主反馈</p>
+		<div class="dshow" style='background: #efeff4;'>
+			<div>
+				<div class="dl" style='width: 100%;'>
+					<p class="adress">路线：{$data.from.proname}&nbsp;-&nbsp;{$data.to.proname}</p>
+					<p>出发日期：{$data.rtime|date="Y-m-d H:i",###}&nbsp;</p>
+					<p>预定日期：{$data.time|date="Y-m-d H:i",###}&nbsp;</p>
+					<p>车主：{$data.user.name}</p> 
+					<p>路线：{$data.rout}</p> 
+					<p>备注：  {$data.note}人</p>  
+				</div>
+			</div>
+		</div>
+		<div class="mui-input-row" style="margin: 10px 5px;margin-bottom: 5px;margin-top: 0px;">
+			<textarea name='result' id="textarea" rows="5" placeholder="不少于10个汉字" style='margin-bottom: 0;'></textarea>
+		</div>
+		<input name='trad_id' type='hidden' id='trad_id' value='{$data.id}' />
+		<button type="button" id='refused' class="mui-btn mui-btn-danger mui-btn-block btns">反馈</button>
+		
+	</div>
+
+	
+	
+	<script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+   <script src="__JS__/jquery-3.0.0.min.js"></script>
+   <script type="text/javascript">
+   		var idvalue = document.getElementById('trad_id').value;
+   		
+    	var refused = document.getElementById('refused');
+    	refused.addEventListener('tap',function() {
+    		var textarea = $('#textarea').val();
+    		$.post('{:U("Feedback/editfeed")}', {trad_id : idvalue, result : textarea}, function(data) {
+    			data = JSON.parse(data);
+     			 if(data.status) {
+     			 	mui.alert(data.info, '顺风车', function() {
+						window.location.href = "{:U('Feedback/index')}";		
+					});
+     			 }else {
+     			 	mui.alert(data.info);
+     			 }
+    		});
+    	})
+   </script>
+
+</body>
+</html>

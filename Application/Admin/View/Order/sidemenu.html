@@ -1,0 +1,55 @@
+<div id="subnav" class="subnav" >
+	<h3>
+		<i class="icon"></i>订单管理
+	</h3>
+	<ul class="side-sub-menu subnav-off sildemenu" style="display: block;">
+		<li class="<if condition='$current eq 1'> current</if>">
+			<a class="item" href="{:U('Order/complete')}">已预定</a>
+		</li>
+		<li class="<if condition='$current eq 0'> current</if>">
+			<a class="item" href="{:U('Order/index')}">待确定</a>
+		</li>
+		<li class="<if condition='$current eq 2'> current</if>">
+			<a class="item" href="{:U('Order/rejected')}">已拒绝</a>
+		</li> 	
+	</ul>
+	
+	<h3>
+		<i class="icon"></i>退订管理
+	</h3>
+	<ul class="side-sub-menu subnav-off" style="display: block;">
+		<li class="<if condition='$current eq 3'> current</if>">
+			<a class="item" href="{:U('Order/tuidingcom')}">已退订</a>
+		</li>
+		<li class="<if condition='$current eq 4'> current</if>">
+			<a class="item" href="{:U('Order/tuiding')}">待退订</a>
+		</li>
+		<li class="<if condition='$current eq 5'> current</if>">
+			<a class="item" href="{:U('Order/tuidingrej')}">已拒绝</a>
+		</li> 	
+	</ul>
+	
+	<!--<ul class="side-sub-menu subnav-off" style="display: block;">
+		<li class='fedbk' style='    margin-left: -15px;'>
+			<a class="item" href='{:U("Feedback/index")}' style=' padding-left: 15px;' ><i class="fa fa-hand-o-right" style='font-size: 16px;margin-right: 10px;'></i>订单反馈</a>
+		</li> 	
+	</ul>-->
+	
+	<h3>
+		<i class="icon"></i>订单反馈
+	</h3>
+	<ul class="side-sub-menu subnav-off feedb" style="display: block;">
+		<li class="<if condition='$current eq 3'> current</if>">
+			<a class="item" href="{:U('Feedback/com')}">已处理</a>
+		</li>
+		<li class="<if condition='$current eq 4'> current</if>">
+			<a class="item" href='{:U("Feedback/index")}'>待处理</a>
+		</li>
+		<li class="<if condition='$current eq 5'> current</if>">
+			<a class="item" href="{:U('Feedback/tuiding')}">已忽略</a>
+		</li> 	
+	</ul>
+	
+	
+	
+</div>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>车主发布</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="__CSS__/p.css" />      
+		<link rel="stylesheet" href="__CSS__/mui.css">
+		<link rel="stylesheet" href="__CSS__/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="__CSS__/mui.picker.min.css" />
+	</head>
+	<body style="background: #fff;">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #dd524d;"></a>
+			<h1 class="mui-title" style="color: #dd524d;">车主发布</h1>
+		</header>
+		
+		<div class="mui-content mcc">
+			<form action='{:U("People/savecar")}' method='post' >
+			<div class="mui-row md">
+				<div class="mui-col-sm-3 mui-col-xs-3">
+		            <li class="mui-table-view-cell fcc pb">
+		             	<p class='cpl fff fline'>【起止地】</p>
+		            </li>
+		        </div>
+		        <div class="mui-col-sm-9 mui-col-xs-9">
+		        	<li class="mui-table-view-cell mcv pb" >
+		        		<div class="mui-col-sm-5 mui-col-xs-5 mui-col-xs lc">
+			             	<div >
+					        	<button id='mf' type='button' class="mui-btn mui-btn-outlined mbo fff lsp">
+					        		<present name="Think.session.fromp">
+										{$Think.session.fromp.proname}  <input type='hidden' name='from' value='{$Think.session.fromp.id}' />
+										<else /> 郑州  <input type='hidden' name='from' value='130' /> 
+									</present>
+					        	</button>
+					        </div>
+			        	</div>
+			        	<div class="mui-col-sm-2 mui-col-xs-2 mui-col-xs lc">
+		             		<div><i class="fa fa-exchange fclo" aria-hidden="true""></i></div>
+			        	</div>
+			        	<div class="mui-col-sm-5 mui-col-xs-5 mui-col-xs lc">
+			             	<div>
+					        	<buttom id='mt' type='button' class="mui-btn mui-btn-outlined mbo fff lsp">
+					        		<present name="Think.session.top">
+										{$Think.session.top.proname} <input type='hidden' name='to' value='{$Think.session.top.id}' />
+										<else /> 长恒  <input type='hidden' name='to' value='11' />
+									</present>
+								</button>
+					        </div>
+			        	</div>
+		        	</li>
+		        </div>
+		   </div>
+		   <div class="mui-row"> 
+		        <div class="mui-col-sm-3 mui-col-xs-3">
+		            <li class="mui-table-view-cell fcc pb">
+		             	<p class='cpl fff'>【路线】</p>
+		            </li>
+		        </div>
+		        <div class="mui-col-sm-9 mui-col-xs-9">
+		            <li class="mui-table-view-cell pb">
+		            	<textarea id="textarea" name='rout' rows="5" class='mbrs fff' placeholder="请输入正确的出行路线，长度不可少于50个字，我们会给予审核，并奖励相应的信誉值"></textarea>
+		            </li> 
+		        </div>
+		   </div> 
+		    <div class="mui-row">
+		        <div class="mui-col-sm-3 mui-col-xs-3">
+		            <li class="mui-table-view-cell fcc pb">
+		             	<p class='cpl fff' style="margin-top: 8px;">【时间】</p>
+		            </li>
+		        </div>
+		        <div class="mui-col-sm-9 mui-col-xs-9">
+		            <li class="mui-table-view-cell pb">
+		            	<div>
+							<input id='demo2' name='time' data-options='{"type":"datetime","beginYear":2017,"endYear":2020}' class="btn mui-btn mui-btn-block dss"  placeholder="选择日期 ..." /> 
+						</div>
+		            </li>
+		        </div>
+		    </div>
+		    <div class="mui-row"> 
+		        <div class="mui-col-sm-3 mui-col-xs-3">
+		            <li class="mui-table-view-cell fcc pb">
+		             	<p class='cpl fff' style="margin-top: 8px;">【车型】</p> 
+		            </li>
+		        </div>
+		        <div class="mui-col-sm-9 mui-col-xs-9">
+		            <li class="mui-table-view-cell pb">
+		            	<input type="text" name='carmodel' class='ihg fff' placeholder="大众奔腾">
+		            </li>
+		        </div>
+		    </div>
+		     <div class="mui-row">
+		        <div class="mui-col-sm-3 mui-col-xs-3">
+		            <li class="mui-table-view-cell fcc pb">
+		             	<p class='cpl fff' style="margin-top: 8px;">【余座】</p>
+		            </li>
+		        </div>
+		        <div class="mui-col-sm-9 mui-col-xs-9">
+		            <li class="mui-table-view-cell pb">
+		            	<input type="number" name='count' class='ihg fff' placeholder="3">
+		            </li>
+		        </div>
+		    </div>
+		     <div class="mui-row">
+		        <div class="mui-col-sm-3 mui-col-xs-3">
+		            <li class="mui-table-view-cell fcc pb">
+		             	<p class='cpl fff' style="margin-top: 10px;">【A费】</p>
+		            </li>
+		        </div>
+		        <div class="mui-col-sm-9 mui-col-xs-9">
+		            <li class="mui-table-view-cell pb">
+		            	<input type="number" name='money' class='ihg fff' placeholder="50">
+		            </li>
+		        </div>
+		    </div>
+		    <div class="mui-row">
+		        <div class="mui-col-sm-3 mui-col-xs-3">
+		            <li class="mui-table-view-cell fcc pb">
+		             	<p class='cpl fff'>【备注】</p>
+		            </li>
+		        </div>
+		        <div class="mui-col-sm-9 mui-col-xs-9"> 
+		            <li class="mui-table-view-cell pb">
+		            	<textarea id="textarea" name='note' rows="2" class='mbrs fff'>顺路上下，--点击预定即可</textarea>
+		            </li>
+		        </div>
+		    </div>
+		    <button type="button" id='subndub' class="mui-btn mui-btn-danger mui-btn-block ndb">发布出行信息</button>
+		    </form>
+		</div>
+		
+		<script src="__JS__/mui.min.js"></script>
+		<script src="__JS__/mui.picker.min.js"></script>
+		<script>
+			(function($) {
+				$.init();
+				var btns = $('.btn');
+				btns.each(function(i, btn) {
+					btn.addEventListener('tap', function() {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+						var picker = new $.DtPicker(options); 
+						picker.show(function(rs) {
+							demo2.value = parseInt(rs.y.text) + '-'+ parseInt(rs.m.text) +'-'+ parseInt(rs.d.text) + ' '+ parseInt(rs.h.text) + ':' + parseInt(rs.i.text);
+							picker.dispose();
+						});
+					}, false);
+				});
+			})(mui);
+		</script>
+		
+		
+		 <script type="text/javascript">
+	    	var mf = document.getElementById('mf');
+	    	var mt = document.getElementById('mt');
+	    	
+	    	mf.addEventListener('tap', function() {
+	    		window.location.href = '__APP__/Home/Release/selcity/from/10';
+	    	});
+	    	mt.addEventListener('tap', function() {
+	    		window.location.href = '__APP__/Home/Release/selcity/to/100'; 
+	    	})
+	    	
+	    </script>
+	    
+	    <script src="__JS__/jquery-3.0.0.min.js"></script>
+	    
+	    <script type='text/javascript'>
+	    	var subndub = document.getElementById('subndub');
+	    	subndub.addEventListener('tap', function() {
+	    		$.post('{:U("Release/savecar")}', $("form").serialize(), function(data) {
+	    			data = JSON.parse(data);
+	    			if(data.status == 0) {
+	    				mui.alert(data.info, '顺风车', function() {
+							window.location.href = "{:U('Release/sendcarinfo')}";			
+						}); 
+	    			}else {
+	    				mui.alert(data.info); 
+	    			}
+	    		});
+	    	})
+	    </script>
+		
+	</body>
+</html>

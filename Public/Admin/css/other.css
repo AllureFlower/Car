@@ -1,0 +1,103 @@
+* {
+	margin: 0;
+	padding: 0;
+    font-family: "lucida Grande",Verdana,"Microsoft YaHei";  
+}
+html {
+	font-size: 62.5%;
+}
+ul,li,ol,dt,dd {
+	list-style: none;
+}
+img {
+	max-width: 100%;
+	border: none;
+}
+object,embed {
+	max-width:100%;
+}
+input {
+	font-family: "lucida Grande",Verdana,"Microsoft YaHei";
+}
+.email {
+	width: 800px;
+	min-width: 500px;
+	margin: 0 auto;
+    position: relative;
+    top: 100px;
+}
+.email-nav  {
+	height: 27px;
+}
+.email-nav>ul>li {
+	float: left;
+	height: 27px;
+	width: 110px;
+	background: rgb(211,211,239);
+	margin-right: 2px;
+	text-align: center;
+	line-height: 27px;
+    color: #fff;	
+    font-weight: bold;
+    font-size: 1.4rem;
+    font-family: "lucida Grande",Verdana,"Microsoft YaHei";
+    letter-spacing: 1px;
+}
+.clear {
+	clear: both;
+}
+.email-nav ul li.current {
+    background: rgb(45, 45, 45);
+}
+.email-send  {
+	background: rgb(45, 45, 45);
+}
+.email-send input.send {
+	background: -webkit-linear-gradient(top,#ffffff 0%,#ebebeb 90%,#F3F3F3 100%);
+    display: inline-block;
+    height: 25px;
+    min-width: 24px;
+    line-height: 24px;
+    line-height: 23px\9\0;
+    padding: 0 15px;
+    margin: 5px 16px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #888;
+    color: #000000;
+    font-size: 1.4rem;
+}
+.emailuser label.email-label {
+    color: #fff;
+    font-size: 1.2rem;
+    font-family: "lucida Grande",Verdana,"Microsoft YaHei";
+    padding-right: 5px;
+    display: inline-block;
+    width: 40px;
+}
+.email-ready {
+	background: rgb(56, 56, 56);
+    padding: 20px 40px;
+}
+#user,#theme {
+	padding: 2px 3px;
+    outline: none;
+    line-height: 1.2rem;
+    border: 1px solid #c3c3c3;
+    border-top: 1px solid #7c7c7c;
+    border-left: 1px solid #9a9a9a;
+    width: 50%;
+}
+.emiltheme {
+	margin-top: 15px;
+	color: #000000;
+}
+.emiltheme label.tlabel {
+	color: #000000;
+    letter-spacing: 8px;
+} 
+.editormd-fullscreen {
+    top: 50px!important;
+}
